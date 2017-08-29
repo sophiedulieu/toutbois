@@ -2,9 +2,16 @@ package model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Representative extends Person {
+	
+	private ObservableList<Representative> representativeData = FXCollections.observableArrayList();
+	
+	public ObservableList<Representative> getRepresentative() {
+		return representativeData;
+	}
 
 	private final DoubleProperty commissionRate;
 	private final DoubleProperty basicSalary;

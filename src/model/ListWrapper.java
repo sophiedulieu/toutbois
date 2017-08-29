@@ -5,10 +5,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "representative")
+@XmlRootElement(name = "representatives")
 public class ListWrapper {
 
-private List<Representative> representative;
+private List<Representative> representatives;
 	
 	@XmlElement(name = "representatives")
 	public List<Representative> getRepresentatives() {
