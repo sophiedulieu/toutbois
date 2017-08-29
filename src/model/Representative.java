@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import mainApp.Main;
 
+
 public class Representative extends Person {
 	
 	private Main main;
@@ -17,20 +18,21 @@ public class Representative extends Person {
 	
 	private ObservableList<Representative> representativeData = FXCollections.observableArrayList();
 	
-	public ObservableList<Representative> getRepresentative() {
+	public ObservableList<Representative> getRepresentativeData() {
 		return representativeData;
 	}
 
 	private final DoubleProperty commissionRate;
 	private final DoubleProperty basicSalary;
 	
-	public Representative(Double commissionRate, Double basicSalary) {	
+	public Representative(String idPerson, String firstName, String lastName, String phoneNum, Double commissionRate, Double basicSalary) {	
+		super();
 		this.commissionRate = new SimpleDoubleProperty(commissionRate);
 		this.basicSalary = new SimpleDoubleProperty(basicSalary);
 	}
 	
 	public Representative() {
-		this(0d,0d);
+		this(null,null,null,null,0d,0d);
 	}
 	
 	
@@ -51,7 +53,7 @@ public class Representative extends Person {
 	public void setBasicSalary(Double basicSalary) {
 		this.basicSalary.set(basicSalary);
 	}
-	public DoubleProperty basicSalary() {
+	public DoubleProperty basicSalaryProperty() {
 		return basicSalary;
 	}
 	

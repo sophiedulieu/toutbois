@@ -48,7 +48,7 @@ public class Person {
 	public void setFirstName(String firstName) {
 		this.firstName.set(firstName);
 	}
-	public StringProperty firstName() {
+	public StringProperty firstNameProperty() {
 		return firstName;
 	}
 	
@@ -59,7 +59,7 @@ public class Person {
 	public void setLastName(String lastName) {
 		this.lastName.set(lastName);
 	}
-	public StringProperty lastName() {
+	public StringProperty lastNameProperty() {
 		return lastName;
 	}
 	
@@ -70,7 +70,7 @@ public class Person {
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum.set(phoneNum);
 	}
-	public StringProperty phoneNum() {
+	public StringProperty phoneNumProperty() {
 		return phoneNum;
 	}
 	
@@ -81,7 +81,7 @@ public class Person {
 	public void SetFaxNum(String faxNum) {
 		this.faxNum.set(faxNum);
 	}
-	public StringProperty faxNum() {
+	public StringProperty faxNumProperty() {
 		return faxNum;
 	}
 	
@@ -92,7 +92,7 @@ public class Person {
 	public void setEmail(String email) {
 		this.email.set(email);
 	}
-	public StringProperty email() {
+	public StringProperty emailProperty() {
 		return email;
 	}
 }

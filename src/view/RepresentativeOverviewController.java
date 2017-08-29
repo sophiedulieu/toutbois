@@ -52,7 +52,7 @@ public class RepresentativeOverviewController {
 	    }
 	    
 	    
-	    //Initialisation du controller
+	    //Initialize controller
 	    @FXML
 	    private void initialize() {
 
@@ -64,8 +64,7 @@ public class RepresentativeOverviewController {
 	        commissionRateColumn.setCellValueFactory(cellData -> cellData.getValue().commissionRateProperty().asObject());
 	        
 	        showRepresentativeDetails(null);
-	        //setRepresentant(null);
-
+;
 	        representativeTable.getSelectionModel().selectedItemProperty().addListener(
 	                (observable, oldValue, newValue) -> showRepresentativeDetails(newValue));
 	    }
@@ -74,7 +73,7 @@ public class RepresentativeOverviewController {
 		public void setMain(Main main) {
 			this.main = main;	
 			// Add observable list data to the table
-	        representativeTable.setItems(main.getRepresentativeData());		
+	        representativeTable.setItems(representative.getRepresentativeData());		
 		}
 	    
 	    
@@ -87,8 +86,8 @@ public class RepresentativeOverviewController {
 	            lastNameField.setText(representative.getLastName());           	            
 				idPersonField.setText(representative.getIdPerson());
 				phoneNumField.setText(representative.getPhoneNum());
-	            basicSalary.setText(Double.toString(representative.getBasicSalary()));
-	            commissionRate.setText(Double.toString(commissionRate.getTauxCom()));
+	            basicSalaryField.setText(Double.toString(representative.getBasicSalary()));
+	            commissionRateField.setText(Double.toString(representative.getCommissionRate()));
 
 	        } else {
 	        	//Earase all text if representative is null
@@ -96,13 +95,12 @@ public class RepresentativeOverviewController {
 	            lastNameField.setText("");        	            
 				idPersonField.setText("");
 				phoneNumField.setText("");
-	            basicSalary.setText("");
-	            commissionRate.setText("");
+	            basicSalaryField.setText("");
+	            commissionRateField.setText("");
 	        }
 		}
 		
-		//Manage Errors
-		
+		//Manage Errors	
 		private boolean isInputValid() {
 			String errorMessage = "" ;
 			
@@ -188,7 +186,7 @@ public class RepresentativeOverviewController {
 		}
 	    
 		
-		//Add ans edit
+		//Add and edit
 		//Add a representative
 		public boolean isAddClicked() {
 	        return addClicked;
@@ -199,13 +197,17 @@ public class RepresentativeOverviewController {
 		private void handleAdd() {
 			if (isInputValid()) {
 				
-				Representative represeTemp = new Representative(firstNameField.getText(), lastNameField.getText(), idPersonField.getText(), phoneNumField.getText(), Double.parseDouble(basicSalaryField.getText()), 
+				Representative represeTemp = new Representative(firstNameField.getText(), 
+						lastNameField.getText(), 
+						idPersonField.getText(), 
+						phoneNumField.getText(), 
+						Double.parseDouble(basicSalaryField.getText()), 
 						Double.parseDouble(commissionRateField.getText()));
+				
 				addClicked = true;
 			
-		        
 				if (addClicked) {
-		            main.getRepresentativeData().add(represeTemp);
+		            representative.getRepresentativeData().add(represeTemp);
 			}
 				
 			}
@@ -232,17 +234,12 @@ public class RepresentativeOverviewController {
 					selectedRepresentative.setLastName(lastNameField.getText());
 					selectedRepresentative.setIdPerson(idPersonField.getText());
 					selectedRepresentative.setPhoneNum(phoneNumField.getText());
-					selectedRepresentative.setCommissionRate(Double.parseDouble(commissionRate.getText()));
-					selectedRepresentative.setBasicSalary(Double.parseDouble(basicSalary.getText()));
+					selectedRepresentative.setCommissionRate(Double.parseDouble(commissionRateField.getText()));
+					selectedRepresentative.setBasicSalary(Double.parseDouble(basicSalaryField.getText()));
 		          
 				}		
 		        } 
-		        } 
-		
+		        } 	
 		}
-				
-				
-			
-		
-	
+					
 }
