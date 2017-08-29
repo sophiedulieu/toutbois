@@ -46,7 +46,7 @@ public class Representative extends Person {
 	}
 	
 
-	public static ObservableList<Representant>getRepresentantList() {
-		return getRepresentantList();
+	public static ObservableList<Representative>getRepresentativeList() {
+		return getRepresentativeList();
 	}
 }
