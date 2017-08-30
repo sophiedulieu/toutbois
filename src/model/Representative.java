@@ -4,35 +4,27 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import mainApp.Main;
 
 
 public class Representative extends Person {
 	
-	private Main main;
+	private static ObservableList<Representative> representativeData = FXCollections.observableArrayList();
 	
-	public void setMain(Main main) {
-		this.main = main;
-	}
-	
-	private ObservableList<Representative> representativeData = FXCollections.observableArrayList();
-	
-	public ObservableList<Representative> getRepresentativeData() {
+	public static ObservableList<Representative> getRepresentativeData() {
 		return representativeData;
 	}
 
 	private final DoubleProperty commissionRate;
 	private final DoubleProperty basicSalary;
 	
-	public Representative(String idPerson, String firstName, String lastName, String phoneNum, Double commissionRate, Double basicSalary) {	
-		super();
+	public Representative(String firstName, String lastName, String idPerson, String phoneNum, String faxNum, String email, Double commissionRate, Double basicSalary) {	
+		super(firstName, lastName, idPerson, phoneNum, faxNum, email);
 		this.commissionRate = new SimpleDoubleProperty(commissionRate);
 		this.basicSalary = new SimpleDoubleProperty(basicSalary);
 	}
 	
 	public Representative() {
-		this(null,null,null,null,0d,0d);
+		this(null,null,null,null,null, null, 0d,0d);
 	}
 	
 	
@@ -57,12 +49,6 @@ public class Representative extends Person {
 		return basicSalary;
 	}
 	
-	
-	//Show Representative
-	@FXML
-	private void handleShowRepresentant() {		               
-        main.showRepresentativeOverview();
-	}
 	
 	
 	public String toString() {

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumnBase;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,6 +23,10 @@ public class RepresentativeOverviewController {
 	    @FXML
 	    private TableColumn<Representative,String>  phoneNumColumn;
 	    @FXML
+	    private TableColumn<Representative,String>  faxNumColumn;
+	    @FXML
+	    private TableColumn<Representative,String>  emailColumn;
+	    @FXML
 	    private TableColumn<Representative, Double> basicSalaryColumn;
 	    @FXML
 	    private TableColumn<Representative, Double> commissionRateColumn;
@@ -37,6 +40,10 @@ public class RepresentativeOverviewController {
 	    private TextField idPersonField;
 	    @FXML
 	    private TextField phoneNumField;
+	    @FXML
+	    private TextField faxNumField;
+	    @FXML
+	    private TextField emailField;
 	    @FXML
 	    private TextField basicSalaryField;
 	    @FXML
@@ -60,11 +67,13 @@ public class RepresentativeOverviewController {
 	        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
 	        idPersonColumn.setCellValueFactory(cellData -> cellData.getValue().idPersonProperty());
 	        phoneNumColumn.setCellValueFactory(cellData -> cellData.getValue().phoneNumProperty());
+	        faxNumColumn.setCellValueFactory(cellData -> cellData.getValue().faxNumProperty());
+	        emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
 	        basicSalaryColumn.setCellValueFactory(cellData -> cellData.getValue().basicSalaryProperty().asObject());
 	        commissionRateColumn.setCellValueFactory(cellData -> cellData.getValue().commissionRateProperty().asObject());
 	        
 	        showRepresentativeDetails(null);
-;
+
 	        representativeTable.getSelectionModel().selectedItemProperty().addListener(
 	                (observable, oldValue, newValue) -> showRepresentativeDetails(newValue));
 	    }
@@ -73,7 +82,7 @@ public class RepresentativeOverviewController {
 		public void setMain(Main main) {
 			this.main = main;	
 			// Add observable list data to the table
-	        representativeTable.setItems(representative.getRepresentativeData());		
+	        representativeTable.setItems(Representative.getRepresentativeData());		
 		}
 	    
 	    
@@ -86,6 +95,8 @@ public class RepresentativeOverviewController {
 	            lastNameField.setText(representative.getLastName());           	            
 				idPersonField.setText(representative.getIdPerson());
 				phoneNumField.setText(representative.getPhoneNum());
+				faxNumField.setText(representative.getFaxNum());
+				emailField.setText(representative.getEmail());
 	            basicSalaryField.setText(Double.toString(representative.getBasicSalary()));
 	            commissionRateField.setText(Double.toString(representative.getCommissionRate()));
 
@@ -95,6 +106,8 @@ public class RepresentativeOverviewController {
 	            lastNameField.setText("");        	            
 				idPersonField.setText("");
 				phoneNumField.setText("");
+				faxNumField.setText("");
+				emailField.setText("");
 	            basicSalaryField.setText("");
 	            commissionRateField.setText("");
 	        }
@@ -138,14 +151,14 @@ public class RepresentativeOverviewController {
 			if (commissionRateField.getText() == null || commissionRateField.getText().length() == 0) {
 	            errorMessage += "Taux non valide !\n";
 	        }
-			if (commissionRateField.getText().length() >= 4) {
+			if (commissionRateField.getText().length() >= 10) {
 				errorMessage += "Le taux est trop long !";
 			}
 			
 			if (basicSalaryField.getText() == null || basicSalaryField.getText().length() == 0) {
 	            errorMessage += "Salaire non valide !\n";
 	        }
-			if (basicSalaryField.getText().length() >= 10000) {
+			if (basicSalaryField.getText().length() >= 10) {
 				errorMessage += "Le salaire est trop grand !";
 			}
 			
@@ -174,7 +187,7 @@ public class RepresentativeOverviewController {
 		    if (selectedIndex >= 0) {
 		    representativeTable.getItems().remove(selectedIndex);
 		    } else {
-		    	// Rien n'est sélectionné
+		    	// Nothing is selected
 		        Alert alert = new Alert(AlertType.WARNING);
 		        alert.initOwner(main.getPrimaryStage());
 		        alert.setTitle("Aucune sélection");
@@ -201,13 +214,15 @@ public class RepresentativeOverviewController {
 						lastNameField.getText(), 
 						idPersonField.getText(), 
 						phoneNumField.getText(), 
+						faxNumField.getText(),
+						emailField.getText(),
 						Double.parseDouble(basicSalaryField.getText()), 
 						Double.parseDouble(commissionRateField.getText()));
 				
 				addClicked = true;
 			
 				if (addClicked) {
-		            representative.getRepresentativeData().add(represeTemp);
+		            Representative.getRepresentativeData().add(represeTemp);
 			}
 				
 			}
@@ -234,6 +249,8 @@ public class RepresentativeOverviewController {
 					selectedRepresentative.setLastName(lastNameField.getText());
 					selectedRepresentative.setIdPerson(idPersonField.getText());
 					selectedRepresentative.setPhoneNum(phoneNumField.getText());
+					selectedRepresentative.SetFaxNum(faxNumField.getText());
+					selectedRepresentative.setEmail(emailField.getText());
 					selectedRepresentative.setCommissionRate(Double.parseDouble(commissionRateField.getText()));
 					selectedRepresentative.setBasicSalary(Double.parseDouble(basicSalaryField.getText()));
 		          

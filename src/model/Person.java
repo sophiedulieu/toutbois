@@ -7,17 +7,17 @@ public class Person {
 	protected StringProperty idPerson;
 	protected StringProperty firstName;
 	protected StringProperty lastName;
-	private final StringProperty phoneNum;
-	private final StringProperty faxNum;
-	private final StringProperty email;
+	protected StringProperty phoneNum;
+	protected StringProperty faxNum;
+	protected StringProperty email;
 
 	
 	//Constructor
-	public Person(String idPerson, String firstName, String lastName, String phoneNum, String faxNum, String email) {
+	public Person(String firstName, String lastName, String idPerson, String phoneNum, String faxNum, String email) {
 		
-		this.idPerson = new SimpleStringProperty(idPerson);
 		this.firstName = new SimpleStringProperty(firstName);
 		this.lastName = new SimpleStringProperty(lastName);
+		this.idPerson = new SimpleStringProperty(idPerson);
 		this.phoneNum = new SimpleStringProperty(phoneNum);
 		this.faxNum = new SimpleStringProperty(faxNum);
 		this.email = new SimpleStringProperty(email);

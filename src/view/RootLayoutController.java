@@ -11,6 +11,12 @@ public class RootLayoutController {
 		this.main = main;
 	}
 	
+	//Show Representative
+	@FXML
+	private void handleShowRepresentant() {		               
+        main.showRepresentativeOverview();
+	}
+	
 	//Leave program
 	@FXML
 	private void handleExit() {
