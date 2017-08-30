@@ -17,14 +17,14 @@ public class Representative extends Person {
 	private final DoubleProperty commissionRate;
 	private final DoubleProperty basicSalary;
 	
-	public Representative(String firstName, String lastName, String idPerson, String phoneNum, String faxNum, String email, Double commissionRate, Double basicSalary) {	
-		super(firstName, lastName, idPerson, phoneNum, faxNum, email);
+	public Representative(String firstName, String lastName, /*Integer numPerson,*/ String phoneNum, String faxNum, String email, Double commissionRate, Double basicSalary) {	
+		super(firstName, lastName, /*numPerson,*/ phoneNum, faxNum, email);
 		this.commissionRate = new SimpleDoubleProperty(commissionRate);
 		this.basicSalary = new SimpleDoubleProperty(basicSalary);
 	}
 	
 	public Representative() {
-		this(null,null,null,null,null, null, 0d,0d);
+		this(null,null,null,null, null, 0d,0d);
 	}
 	
 	

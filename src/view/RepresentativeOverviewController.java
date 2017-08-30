@@ -3,6 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -19,13 +20,13 @@ public class RepresentativeOverviewController {
 	    @FXML
 	    private TableColumn<Representative, String> lastNameColumn;
 	    @FXML
-	    private TableColumn<Representative, String> idPersonColumn;
+	    private TableColumn<Representative, Integer> numPersonColumn;
 	    @FXML
-	    private TableColumn<Representative,String>  phoneNumColumn;
+	    private TableColumn<Representative, String>  phoneNumColumn;
 	    @FXML
-	    private TableColumn<Representative,String>  faxNumColumn;
+	    private TableColumn<Representative, String>  faxNumColumn;
 	    @FXML
-	    private TableColumn<Representative,String>  emailColumn;
+	    private TableColumn<Representative, String>  emailColumn;
 	    @FXML
 	    private TableColumn<Representative, Double> basicSalaryColumn;
 	    @FXML
@@ -37,7 +38,7 @@ public class RepresentativeOverviewController {
 	    @FXML
 	    private TextField lastNameField;
 	    @FXML
-	    private TextField idPersonField;
+	    private Label numPersonField;
 	    @FXML
 	    private TextField phoneNumField;
 	    @FXML
@@ -65,7 +66,7 @@ public class RepresentativeOverviewController {
 
 	        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 	        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-	        idPersonColumn.setCellValueFactory(cellData -> cellData.getValue().idPersonProperty());
+	        numPersonColumn.setCellValueFactory(cellData -> cellData.getValue().numPersonProperty().asObject());
 	        phoneNumColumn.setCellValueFactory(cellData -> cellData.getValue().phoneNumProperty());
 	        faxNumColumn.setCellValueFactory(cellData -> cellData.getValue().faxNumProperty());
 	        emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
@@ -93,7 +94,7 @@ public class RepresentativeOverviewController {
 				//Fill lavels with representative informations
 				firstNameField.setText(representative.getFirstName());
 	            lastNameField.setText(representative.getLastName());           	            
-				idPersonField.setText(representative.getIdPerson());
+				numPersonField.setText(Integer.toString(representative.getnumPerson()));
 				phoneNumField.setText(representative.getPhoneNum());
 				faxNumField.setText(representative.getFaxNum());
 				emailField.setText(representative.getEmail());
@@ -104,7 +105,7 @@ public class RepresentativeOverviewController {
 	        	//Earase all text if representative is null
 	        	firstNameField.setText("");
 	            lastNameField.setText("");        	            
-				idPersonField.setText("");
+				numPersonField.setText("");
 				phoneNumField.setText("");
 				faxNumField.setText("");
 				emailField.setText("");
@@ -132,12 +133,12 @@ public class RepresentativeOverviewController {
 				errorMessage += "Le nom est trop long !";
 			}
 			
-			if (idPersonField.getText() == null || idPersonField.getText().length() == 0) {
+			/* if (idPersonField.getText() == null || idPersonField.getText().length() == 0) {
 	            errorMessage += "Pas de numéro !\n";
 	        }
 			if (idPersonField.getText().length() >= 10) {
 				errorMessage += "Le numéro est trop long !";
-			}
+			} */
 			
 			
 			if (phoneNumField.getText() == null || phoneNumField.getText().length() == 0) {
@@ -212,7 +213,7 @@ public class RepresentativeOverviewController {
 				
 				Representative represeTemp = new Representative(firstNameField.getText(), 
 						lastNameField.getText(), 
-						idPersonField.getText(), 
+						//Integer.parseInt(numPersonField.getText()), 
 						phoneNumField.getText(), 
 						faxNumField.getText(),
 						emailField.getText(),
@@ -247,7 +248,7 @@ public class RepresentativeOverviewController {
 		            
 					selectedRepresentative.setFirstName(firstNameField.getText());
 					selectedRepresentative.setLastName(lastNameField.getText());
-					selectedRepresentative.setIdPerson(idPersonField.getText());
+					selectedRepresentative.setnumPerson(Integer.parseInt(numPersonField.getText()));
 					selectedRepresentative.setPhoneNum(phoneNumField.getText());
 					selectedRepresentative.SetFaxNum(faxNumField.getText());
 					selectedRepresentative.setEmail(emailField.getText());

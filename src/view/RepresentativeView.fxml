@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RepresentativeOverviewController">
+<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RepresentativeOverviewController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="79.0" layoutY="105.0" orientation="VERTICAL" prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -21,40 +21,62 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <GridPane prefHeight="286.0" prefWidth="796.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label styleClass="label-bright" text="Prenom" />
-                                    <Label styleClass="label-bright" text="Nom" GridPane.rowIndex="1" />
-                                    <Label styleClass="label-bright" text="Numero" GridPane.rowIndex="2" />
-                                    <Label styleClass="label-bright" text="SalaireBrut" GridPane.rowIndex="6" />
-                                    <Label styleClass="label-bright" text="Taux de Commission" GridPane.rowIndex="7" />
-                                    <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
-                                    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="idPersonField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="basicSalaryField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <TextField fx:id="commissionRateField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <Label text="Téléphone" GridPane.rowIndex="3" />
-                                    <TextField fx:id="phoneNumField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label text="Fax" GridPane.rowIndex="4" />
-                                    <Label text="Email" GridPane.rowIndex="5" />
-                                    <TextField fx:id="faxNumField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                 </children>
-                              </GridPane>
+                              <SplitPane dividerPositions="0.5" prefHeight="286.0" prefWidth="996.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <GridPane layoutX="3.0" layoutY="-110.0" prefHeight="284.0" prefWidth="494.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label styleClass="label-bright" text="Prenom" />
+                                                <Label styleClass="label-bright" text="Numero" GridPane.rowIndex="1" />
+                                                <Label styleClass="label-bright" text="SalaireBrut" GridPane.rowIndex="3" />
+                                                <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
+                                                <TextField fx:id="basicSalaryField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="faxNumField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label text="Fax" GridPane.rowIndex="2" />
+                                                <Label fx:id="numPersonField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <GridPane layoutX="14.0" layoutY="65.0" prefHeight="284.0" prefWidth="494.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label styleClass="label-bright" text="Nom" />
+                                                <TextField fx:id="lastNameField" GridPane.columnIndex="1" />
+                                                <Label text="Téléphone" GridPane.rowIndex="1" />
+                                                <TextField fx:id="phoneNumField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Email" GridPane.rowIndex="2" />
+                                                <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label styleClass="label-bright" text="Taux de Commission" GridPane.rowIndex="3" />
+                                                <TextField fx:id="commissionRateField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -72,14 +94,14 @@
                <children>
                   <TableView fx:id="representativeTable" layoutX="120.0" prefHeight="346.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="firstNameColumn" prefWidth="207.0" text="Prénom" />
+                      <TableColumn fx:id="firstNameColumn" minWidth="20.0" prefWidth="207.0" text="Prénom" />
                       <TableColumn fx:id="lastNameColumn" minWidth="0.0" prefWidth="190.0" text="Nom" />
-                        <TableColumn fx:id="idPersonColumn" prefWidth="142.0" text="Numéro" />
+                        <TableColumn fx:id="numPersonColumn" prefWidth="142.0" text="Numéro" />
                         <TableColumn fx:id="phoneNumColumn" prefWidth="75.0" text="Téléphone" />
                         <TableColumn fx:id="faxNumColumn" prefWidth="75.0" text="Fax" />
                         <TableColumn fx:id="emailColumn" prefWidth="75.0" text="email" />
                         <TableColumn fx:id="basicSalaryColumn" prefWidth="158.0" text="SalaireBrut" />
-                        <TableColumn fx:id="commissionRateColumn" prefWidth="100.0" text="TauxCom" />
+                        <TableColumn fx:id="commissionRateColumn" maxWidth="400.0" minWidth="50.0" prefWidth="50.0" text="TauxCom" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

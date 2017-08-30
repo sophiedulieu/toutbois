@@ -1,10 +1,13 @@
 package model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Person {
-	protected StringProperty idPerson;
+	protected static int idPerson = 0;
+	protected IntegerProperty numPerson;
 	protected StringProperty firstName;
 	protected StringProperty lastName;
 	protected StringProperty phoneNum;
@@ -13,32 +16,37 @@ public class Person {
 
 	
 	//Constructor
-	public Person(String firstName, String lastName, String idPerson, String phoneNum, String faxNum, String email) {
+	public Person(String firstName, String lastName, /*Integer numPerson,*/ String phoneNum, String faxNum, String email) {
+		
+		idPerson++;
 		
 		this.firstName = new SimpleStringProperty(firstName);
 		this.lastName = new SimpleStringProperty(lastName);
-		this.idPerson = new SimpleStringProperty(idPerson);
+		this.numPerson = new SimpleIntegerProperty(idPerson);
 		this.phoneNum = new SimpleStringProperty(phoneNum);
 		this.faxNum = new SimpleStringProperty(faxNum);
 		this.email = new SimpleStringProperty(email);
+		
+		
+		
 	}
 
 	
 	//Default Constructor
 	public Person() {
-		this(null,null,null,null,null,null);
+		this(null,null,/*null,*/null,null,null);
 	}
 
 	
 	//Getters & Setters
-	public String getIdPerson() {
-		return idPerson.get();
+	public int getnumPerson() {
+		return numPerson.get();
 	}
-	public void setIdPerson(String idPerson) {
-		this.idPerson.set(idPerson);
+	public void setnumPerson(Integer numPerson) {
+		this.numPerson.set(numPerson);
 	}
-	public StringProperty idPersonProperty() {
-		return idPerson;
+	public IntegerProperty numPersonProperty() {
+		return numPerson;
 	}
 	
 	
