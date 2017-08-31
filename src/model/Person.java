@@ -39,10 +39,10 @@ public class Person {
 
 	
 	//Getters & Setters
-	public int getnumPerson() {
+	public int getNumPerson() {
 		return numPerson.get();
 	}
-	public void setnumPerson(Integer numPerson) {
+	public void setNumPerson(Integer numPerson) {
 		this.numPerson.set(numPerson);
 	}
 	public IntegerProperty numPersonProperty() {
@@ -86,7 +86,7 @@ public class Person {
 	public String getFaxNum() {
 		return faxNum.get();
 	}
-	public void SetFaxNum(String faxNum) {
+	public void setFaxNum(String faxNum) {
 		this.faxNum.set(faxNum);
 	}
 	public StringProperty faxNumProperty() {

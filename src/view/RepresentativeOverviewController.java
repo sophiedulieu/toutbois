@@ -94,7 +94,7 @@ public class RepresentativeOverviewController {
 				//Fill lavels with representative informations
 				firstNameField.setText(representative.getFirstName());
 	            lastNameField.setText(representative.getLastName());           	            
-				numPersonField.setText(Integer.toString(representative.getnumPerson()));
+				numPersonField.setText(Integer.toString(representative.getNumPerson()));
 				phoneNumField.setText(representative.getPhoneNum());
 				faxNumField.setText(representative.getFaxNum());
 				emailField.setText(representative.getEmail());
@@ -248,9 +248,9 @@ public class RepresentativeOverviewController {
 		            
 					selectedRepresentative.setFirstName(firstNameField.getText());
 					selectedRepresentative.setLastName(lastNameField.getText());
-					selectedRepresentative.setnumPerson(Integer.parseInt(numPersonField.getText()));
+					selectedRepresentative.setNumPerson(Integer.parseInt(numPersonField.getText()));
 					selectedRepresentative.setPhoneNum(phoneNumField.getText());
-					selectedRepresentative.SetFaxNum(faxNumField.getText());
+					selectedRepresentative.setFaxNum(faxNumField.getText());
 					selectedRepresentative.setEmail(emailField.getText());
 					selectedRepresentative.setCommissionRate(Double.parseDouble(commissionRateField.getText()));
 					selectedRepresentative.setBasicSalary(Double.parseDouble(basicSalaryField.getText()));
