@@ -168,7 +168,7 @@ public abstract class CompanyViewController {
 		// Form
 		typeStreetBox.getItems().setAll(TypeStreet.values());
 		representativeBox.getItems().setAll(
-				Representative.getRepresentativeList());
+				Representative.getRepresentativeData());
 		
 		// Table <-> Form
 		representativeBox.getSelectionModel().selectedItemProperty().addListener(

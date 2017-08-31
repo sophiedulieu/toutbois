@@ -234,7 +234,7 @@ public abstract class Company {
     			new Hashtable<Integer, Integer>();
 		for ( Company company : companyList ) {
 			companyContactMap.put(company.getIdCompany(), 
-					company.getContact().getIdPerson());
+					company.getContact().getNumPerson());
 		}
 		return companyContactMap;
     }
@@ -247,7 +247,7 @@ public abstract class Company {
     			new Hashtable<Integer, Integer>();
 		for ( Company company : companyList ) {
 			companyRepresentativeMap.put(company.getIdCompany(), 
-					company.getRepresentative().getIdPerson());
+					company.getRepresentative().getNumPerson());
 		}
 		return companyRepresentativeMap;
     }
