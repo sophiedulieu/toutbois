@@ -5,8 +5,13 @@ import view.ProspectViewController;
 import view.RepresentativeOverviewController;
 import view.RootLayoutController;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +21,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Address;
 import model.Client;
+import model.Company;
 import model.Contact;
 import model.Prospect;
 import model.Representative;
 import type.TypeStreet;
+import util.DataWrapper;
 
 public class Main extends Application {
 
@@ -34,6 +41,7 @@ public class Main extends Application {
     }
 	public Main() {
 		// TODO data test
+		
 		Representative r1 = new Representative( "Roger", "Dupont", 
 				"456", "456", "lkj@h.com", 0.25, 1500.0 );
 		Representative r2 = new Representative( "Stan", "Smith", 
@@ -48,6 +56,8 @@ public class Main extends Application {
 				"NA", "Colombes", "92700");
 		new Client ("Tchoutchou", 123L, m1, a1, r1);
 		new Prospect("Mattel", 345L, m2, a2, r2, LocalDate.now());
+		Representative.getRepresentativeData().addAll(r1, r2);
+		
 		}
 	
 
@@ -58,7 +68,9 @@ public class Main extends Application {
 	 */
 	@Override
 	public void init() {
-		 //loadData();
+		System.out.println("init");
+		//loadData();
+		System.out.println("loaded");
 	}
 	
 
@@ -96,7 +108,9 @@ public class Main extends Application {
 	 */
 	@Override
 	public void stop() {
-		//saveData();
+		System.out.println("stop");
+		saveData();
+		System.out.println("saved");
 	}
 
 
@@ -215,6 +229,135 @@ public class Main extends Application {
 		catch (IOException e) {
 			// TODO Error
 			e.printStackTrace();
+		}
+	}
+	
+
+
+	// ***********   DATA PERSISTENCE   ***********
+
+
+	// File
+	
+	/**
+	 * Creates the file <code>Toutbois.xml</code> if not found 
+	 * and returns it as a File object.
+	 * 
+	 * @return	Toutbois.xml
+	 */
+	public File setFile() {
+		File file = new File ("Toutbois.xml");
+		if ( ! file.exists() ) {
+			try {
+				file.createNewFile();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("setFile() error");
+				// TODO new AlertDialog(TypeError.CREATE_FILE_ERROR);
+			}
+		}
+		// TODO setFilePath(file) if needed;
+		return file;
+	}
+
+
+	// Marshaller
+	
+	/**
+	 * Marshalls lists from <code>DataWrapper</code> and writes .xml datas 
+	 * into the file returned by <code>setFile()</code>.
+	 * <p>
+	 * The method marshalls the lists containing the companies 
+	 * and people, and the maps registering relations between them, 
+	 * using the Datawrapper helper class. The .xml datas are then
+	 * written into the file returned by the <code>setFile()</code> function 
+	 * (<code>Toutbois.xml</code>).
+	 */
+	public void saveData() {
+		try {
+			JAXBContext context = JAXBContext
+					.newInstance(DataWrapper.class);
+			Marshaller m = context.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			DataWrapper wrapper = new DataWrapper();
+			
+			// lists
+			wrapper.setClientList(Client.getClientList());
+			wrapper.setProspectList(Prospect.getProspectList());
+			wrapper.setContactList(Contact.getContactList());
+			wrapper.setRepresentativeList(Representative.getRepresentativeData());
+			// maps
+			wrapper.setCompanyContactMap(Company.getCompanyContactMap());
+			wrapper.setCompanyRepresentativeMap(Company.getCompanyRepresentativeMap());
+			
+			m.marshal(wrapper, setFile());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("saveData() error");
+			// TODO new AlertDialog(TypeError.SAVE_DATA_ERROR);
+		}
+	}
+
+
+	// Un-Marshaller
+	
+	/**
+	 * Reads .xml datas from the file returned by <code>setFile()</code> and 
+	 * un-marshalls them into lists in <code>DataWrapper</code>.
+	 * <p>
+	 * The methods reads the file returned by the <code>setFile()</code> function 
+	 * (<code>Toutbois.xml</code>). It um-marshalls the .xml datas 
+	 * and add the created entities into the lists holding the companies 
+	 * and people using the <code>Datawrapper</code> helper class. Then, it sets the 
+	 * relations between companies and people using the maps.
+	 */
+	public void loadData() {
+		try {
+			JAXBContext context = JAXBContext
+					.newInstance(DataWrapper.class);
+			Unmarshaller um = context.createUnmarshaller();
+			DataWrapper wrapper = (DataWrapper) um.unmarshal(setFile());
+
+			// lists
+			Contact.getContactList().clear();
+			Contact.getContactList().addAll(wrapper.getContactList());
+			Representative.getRepresentativeData().clear();
+			Representative.getRepresentativeData().addAll(wrapper.getRepresentativeList());
+			Client.getClientList().clear();
+			Client.getClientList().addAll(wrapper.getClientList());
+			Prospect.getProspectList().clear();
+			Prospect.getProspectList().addAll(wrapper.getProspectList());
+			
+			// map company/contact
+			for ( Company company : Company.getCompanyList() ) {
+				for ( Contact contact : Contact.getContactList() ) {
+					if ( contact.getNumPerson() ==
+							wrapper.getCompanyContactMap().get(company.getIdCompany())) {
+						company.setContact(contact);
+						break;
+					}
+				}
+			}
+			
+			// map company/representative
+			for ( Company company : Company.getCompanyList() ) {
+				for ( Representative representative : Representative.getRepresentativeData() ) {
+					if ( representative.getNumPerson() ==
+							wrapper.getCompanyRepresentativeMap().get(company.getIdCompany())) {
+						company.setRepresentative(representative);
+						break;
+					}
+				}
+			}
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("loadData() error");
+			// TODO new AlertDialog(TypeError.LOAD_DATA_ERROR);
 		}
 	}
 	

@@ -43,16 +43,16 @@ public class DataWrapper {
 	// ************   REPRESENTATIVE   ************
 
 	
-    private List<Representative> representativeList;
+    private List<Representative> representatives;
 
     @XmlElementWrapper(name="representativeList")
     @XmlElement(name = "representative")
     public List<Representative> getRepresentativeList() {
-        return representativeList;
+        return representatives;
     }
 
-    public void setRepresentativeList(List<Representative> representativeList) {
-        this.representativeList = representativeList;
+    public void setRepresentativeList(List<Representative> representatives) {
+        this.representatives = representatives;
     }
     
     

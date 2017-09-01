@@ -221,10 +221,6 @@ public abstract class CompanyViewController {
 			selectedCompany.getAddress().setCity(cityField.getText());
 			// representative
 			selectedCompany.setRepresentative(representativeBox.getValue());
-
-			// TODO Fix representativeNameColumn :
-			//		does not print the new name when the representative
-			//		has been modified
 		}
 		else {
 			// No selection

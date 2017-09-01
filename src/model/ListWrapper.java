@@ -15,7 +15,7 @@ private List<Representative> representatives;
 		return representatives;
 	}
 	
-	public void setRepresentatives(List<Representative> representativess) {
+	public void setRepresentatives(List<Representative> representatives) {
 		this.representatives = representatives;
 	}
 	
