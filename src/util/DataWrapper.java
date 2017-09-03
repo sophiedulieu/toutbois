@@ -14,7 +14,10 @@ import model.Representative;
 
 
 /**
- * Helper class : wrap a list of persons and saves it to XML
+ * Helper class : wrap a list of entities and saves it to XML
+ * 
+ * @author Oupouwaout
+ * @author Sophie
  */
 @XmlRootElement(name = "entities")
 @XmlType(propOrder = { "contactList", "representativeList", 
@@ -100,10 +103,12 @@ public class DataWrapper {
     
     @XmlElement(name = "companyContactMap")
     public Hashtable<Integer, Integer> getCompanyContactMap() {
+		System.out.println("getCompanyContactMap");
 		return companyContactMap;
     }
 
     public void setCompanyContactMap(Hashtable<Integer, Integer> companyContactMap) {
+		System.out.println("setCompanyContactMap");
         this.companyContactMap = companyContactMap;
     }
     
@@ -114,10 +119,12 @@ public class DataWrapper {
     
     @XmlElement(name = "companyRepresentativeMap")
     public Hashtable<Integer, Integer> getCompanyRepresentativeMap() {
+		System.out.println("getCompanyRepresentativeMap");
 		return companyRepresentativeMap;
     }
 
     public void setCompanyRepresentativeMap(Hashtable<Integer, Integer> clientRepMap) {
+		System.out.println("setCompanyRepresentativeMap");
         this.companyRepresentativeMap = clientRepMap;
     }
     

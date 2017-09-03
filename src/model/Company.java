@@ -33,7 +33,9 @@ public abstract class Company {
 	protected final IntegerProperty idCompany;
 	protected final StringProperty companyName;
 	protected final LongProperty siret;
+    @XmlTransient
 	protected final ObjectProperty<Representative> representative;
+    @XmlTransient
 	protected final ObjectProperty<Contact> contact;
 	protected final ObjectProperty<Address> address;
     
@@ -207,6 +209,7 @@ public abstract class Company {
 
     // representative
 
+    @XmlTransient
     public Representative getRepresentative() {
     	return representative.get();
     }
@@ -235,12 +238,13 @@ public abstract class Company {
 		for ( Company company : companyList ) {
 			companyContactMap.put(company.getIdCompany(), 
 					company.getContact().getNumPerson());
+			System.out.println("c"+company.getIdCompany()+":"+company.getContact().getNumPerson());
 		}
 		return companyContactMap;
     }
     
     
-    // clientRepresentativeMap
+    // companyRepresentativeMap
     
     public static Hashtable<Integer, Integer> getCompanyRepresentativeMap() {
     	Hashtable<Integer, Integer> companyRepresentativeMap = 
@@ -248,6 +252,7 @@ public abstract class Company {
 		for ( Company company : companyList ) {
 			companyRepresentativeMap.put(company.getIdCompany(), 
 					company.getRepresentative().getNumPerson());
+			System.out.println("r"+company.getIdCompany()+":"+company.getRepresentative().getNumPerson());
 		}
 		return companyRepresentativeMap;
     }

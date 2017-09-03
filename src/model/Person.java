@@ -1,7 +1,5 @@
 package model;
 
-import javax.xml.bind.annotation.XmlElement;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -41,12 +39,12 @@ public class Person {
 
 	
 	//Getters & Setters
-	
-	@XmlElement
-	public int getNumPerson() {
+
+	public Integer getNumPerson() {
 		return numPerson.get();
 	}
 	public void setNumPerson(Integer numPerson) {
+		System.out.println("setNumPerson");
 		this.numPerson.set(numPerson);
 	}
 	public IntegerProperty numPersonProperty() {
@@ -58,6 +56,7 @@ public class Person {
 		return firstName.get();
 	}
 	public void setFirstName(String firstName) {
+		System.out.println("setFirstName");
 		this.firstName.set(firstName);
 	}
 	public StringProperty firstNameProperty() {

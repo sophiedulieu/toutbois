@@ -41,7 +41,7 @@ public class Main extends Application {
     }
 	public Main() {
 		// TODO data test
-		
+		/*
 		Representative r1 = new Representative( "Roger", "Dupont", 
 				"456", "456", "lkj@h.com", 0.25, 1500.0 );
 		Representative r2 = new Representative( "Stan", "Smith", 
@@ -57,7 +57,7 @@ public class Main extends Application {
 		new Client ("Tchoutchou", 123L, m1, a1, r1);
 		new Prospect("Mattel", 345L, m2, a2, r2, LocalDate.now());
 		Representative.getRepresentativeData().addAll(r1, r2);
-		
+		*/
 		}
 	
 
@@ -68,9 +68,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void init() {
-		System.out.println("init");
-		//loadData();
-		System.out.println("loaded");
+		loadData();
 	}
 	
 
@@ -108,9 +106,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void stop() {
-		System.out.println("stop");
 		saveData();
-		System.out.println("saved");
 	}
 
 
@@ -331,23 +327,24 @@ public class Main extends Application {
 			Prospect.getProspectList().clear();
 			Prospect.getProspectList().addAll(wrapper.getProspectList());
 			
+			// map company/representative
+			for ( Company company : Company.getCompanyList() ) {
+				for ( Representative representative : wrapper.getRepresentativeList() ) {
+					if ( representative.getNumPerson() ==
+							wrapper.getCompanyRepresentativeMap().get(company.getIdCompany())) {
+						company.setRepresentative(representative);
+						System.out.println(company.getIdCompany() + " " + representative.getNumPerson());
+						break;
+					}
+				}
+			}
+			
 			// map company/contact
 			for ( Company company : Company.getCompanyList() ) {
 				for ( Contact contact : Contact.getContactList() ) {
 					if ( contact.getNumPerson() ==
 							wrapper.getCompanyContactMap().get(company.getIdCompany())) {
 						company.setContact(contact);
-						break;
-					}
-				}
-			}
-			
-			// map company/representative
-			for ( Company company : Company.getCompanyList() ) {
-				for ( Representative representative : Representative.getRepresentativeData() ) {
-					if ( representative.getNumPerson() ==
-							wrapper.getCompanyRepresentativeMap().get(company.getIdCompany())) {
-						company.setRepresentative(representative);
 						break;
 					}
 				}
