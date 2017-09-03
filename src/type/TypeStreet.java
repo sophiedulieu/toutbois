@@ -1,12 +1,23 @@
 package type;
 
 public enum TypeStreet {
+	ALLEE,
 	AVENUE,
 	BOULEVARD,
+	CHAUSSEE,
 	CHEMIN,
+	CITE,
+	COUR,
 	IMPASSE,
+	MAIL,
+	PASSAGE,
+	PLACE,
 	ROUTE,
 	RUE,
 	RUELLE,
+	SENTE,
+	SENTIER,
+	TRAVERSE,
+	VOIE,
 	AUTRE
 }
