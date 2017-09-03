@@ -28,6 +28,11 @@ public class AlertDialog extends Alert {
 
 	// Warning
 	
+	/**
+	 * Creates and show an alert dialog with informations for the user.
+	 * 
+	 * @param typeWarning	the cause of the warning
+	 */
 	public AlertDialog ( TypeWarning typeWarning ) {
 		super(AlertType.WARNING);
 		
@@ -56,6 +61,11 @@ public class AlertDialog extends Alert {
 
 	// Error
 	
+	/**
+	 * Creates and show an error dialog with minimal informations for the user.
+	 * 
+	 * @param typeError	the operation which failed
+	 */
 	public AlertDialog ( TypeError typeError ) {
 		super(AlertType.ERROR);
 		

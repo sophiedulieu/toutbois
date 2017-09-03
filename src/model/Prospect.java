@@ -66,12 +66,12 @@ public class Prospect extends Company {
      * @param phoneNum			the phone number of the contact in the company
      * @param faxNum			the fax number of the contact in the company
      * @param email				the e-mail of the contact in the company
-     * @param numAddress
-     * @param typeStreet
-     * @param nameStreet
-     * @param complementAddress
-     * @param city
-     * @param postalCode
+     * @param numAddress		the number in the street
+     * @param typeStreet		the <code>TypeStreet</code> enum type
+     * @param nameStreet		the name of the street
+     * @param complementAddress	any complement, if needed
+     * @param city				the city
+     * @param postalCode		the ZIP code
      * @param representative	the representative following the company
      * @param lastVisit			the locale date of the last prospective visit
      */

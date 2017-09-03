@@ -334,7 +334,6 @@ public class Main extends Application {
 					if ( representative.getNumPerson() ==
 							wrapper.getCompanyRepresentativeMap().get(company.getIdCompany())) {
 						company.setRepresentative(representative);
-						System.out.println(company.getIdCompany() + " " + representative.getNumPerson());
 						break;
 					}
 				}

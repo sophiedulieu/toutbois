@@ -9,6 +9,11 @@ import javafx.scene.control.TableView;
 import model.Client;
 import model.Prospect;
 
+
+
+/**
+ * @author	Oupouwaout
+ */
 public class ProspectViewController extends CompanyViewController {
 
 

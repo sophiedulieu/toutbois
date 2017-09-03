@@ -232,13 +232,26 @@ public abstract class Company {
     
     // companyContactMap
     
+    /**
+     * Maps the Company's Id with its Contact's NumPerson.
+     * <p>
+     * This method creates a map, and then iterates the <code>companyList</code>. 
+     * For each company in the list, it writes a set in the map where the 
+     * <code>idCompany</code> is the key and the contact's <code>numPerson</code> 
+     * is the value. 
+     * This map will be used by the unmarshaller from <code>main.loadData()</code> 
+     * to set the <code>Contact</code> object back in its <code>Company</code> object.
+     * The map is marshalled by <code>main.saveData()</code> along with the other
+     * objects.
+     * 
+     * @return	the constructed map
+     */
     public static Hashtable<Integer, Integer> getCompanyContactMap() {
     	Hashtable<Integer, Integer> companyContactMap = 
     			new Hashtable<Integer, Integer>();
 		for ( Company company : companyList ) {
 			companyContactMap.put(company.getIdCompany(), 
 					company.getContact().getNumPerson());
-			System.out.println("c"+company.getIdCompany()+":"+company.getContact().getNumPerson());
 		}
 		return companyContactMap;
     }
@@ -246,13 +259,27 @@ public abstract class Company {
     
     // companyRepresentativeMap
     
+    /**
+     * Maps the Company's Id with its Representative NumPerson.
+     * <p>
+     * This method creates a map, and then iterates the <code>companyList</code>. 
+     * For each company in the list, it writes a set in the map where the 
+     * <code>idCompany</code> is the key and the representative's 
+     * <code>numPerson</code> is the value. 
+     * This map will be used by the unmarshaller from <code>main.loadData()</code> 
+     * to set the <code>Representative</code> object back in its <code>Company</code>
+     *  object.
+     * The map is marshalled by <code>main.saveData()</code> along with the other
+     * objects.
+     * 
+     * @return	the constructed map
+     */
     public static Hashtable<Integer, Integer> getCompanyRepresentativeMap() {
     	Hashtable<Integer, Integer> companyRepresentativeMap = 
     			new Hashtable<Integer, Integer>();
 		for ( Company company : companyList ) {
 			companyRepresentativeMap.put(company.getIdCompany(), 
 					company.getRepresentative().getNumPerson());
-			System.out.println("r"+company.getIdCompany()+":"+company.getRepresentative().getNumPerson());
 		}
 		return companyRepresentativeMap;
     }

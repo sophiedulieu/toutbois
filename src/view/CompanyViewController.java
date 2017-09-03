@@ -12,6 +12,10 @@ import model.Representative;
 import type.TypeStreet;
 
 
+
+/**
+ * @author	Oupouwaout
+ */
 public abstract class CompanyViewController {
 
 

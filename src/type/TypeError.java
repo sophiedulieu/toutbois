@@ -1,5 +1,13 @@
 package type;
 
+
+
+/**
+ * An enum compiling the different cases where an error message 
+ * is sent to the user.
+ * 
+ * @author	Oupouwaout
+ */
 public enum TypeError {
 	CREATE_FILE_ERROR,
 	WRAP_DATA_ERROR,

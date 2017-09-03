@@ -14,7 +14,7 @@ import model.Representative;
 
 
 /**
- * Helper class : wrap a list of entities and saves it to XML
+ * Helper class : wraps a list of entities and saves it to XML
  * 
  * @author Oupouwaout
  * @author Sophie
@@ -97,34 +97,30 @@ public class DataWrapper {
     // *************   ASSOCIATIONS   *************
     
     
-	// Map idCompany with its contact's idPerson
+	// Map idCompany with its contact's numPerson
 	
     private Hashtable<Integer, Integer> companyContactMap;
     
     @XmlElement(name = "companyContactMap")
     public Hashtable<Integer, Integer> getCompanyContactMap() {
-		System.out.println("getCompanyContactMap");
 		return companyContactMap;
     }
 
     public void setCompanyContactMap(Hashtable<Integer, Integer> companyContactMap) {
-		System.out.println("setCompanyContactMap");
         this.companyContactMap = companyContactMap;
     }
     
     
-	// Map idCompany with its representative's idPerson
+	// Map idCompany with its representative's numPerson
 	
     private Hashtable<Integer, Integer> companyRepresentativeMap;
     
     @XmlElement(name = "companyRepresentativeMap")
     public Hashtable<Integer, Integer> getCompanyRepresentativeMap() {
-		System.out.println("getCompanyRepresentativeMap");
 		return companyRepresentativeMap;
     }
 
     public void setCompanyRepresentativeMap(Hashtable<Integer, Integer> clientRepMap) {
-		System.out.println("setCompanyRepresentativeMap");
         this.companyRepresentativeMap = clientRepMap;
     }
     

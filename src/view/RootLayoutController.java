@@ -46,13 +46,15 @@ public class RootLayoutController {
 	// TODO Help
 	
 	// About
-	// TODO About
 	@FXML
 	private void handleAbout() {
 		Alert alert = new Alert(AlertType.INFORMATION);
+		String content = "Logiciel de gestion d'un annuaire de clients " + 
+				"et de prospects, et des représentants de l'entreprise." + 
+				"\n\nAuteur : Oupouwaout et Sophie";
 		alert.setTitle("ToutBois");
 		alert.setHeaderText("A propos");
-		alert.setContentText("Auteur : Oupouwaout");
+		alert.setContentText(content);
 
 		alert.showAndWait();
 	}

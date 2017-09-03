@@ -7,6 +7,11 @@ import javafx.scene.control.TextField;
 import model.Client;
 import model.Prospect;
 
+
+
+/**
+ * @author	Oupouwaout
+ */
 public class ClientViewController extends CompanyViewController {
 
 
