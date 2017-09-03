@@ -44,7 +44,6 @@ public class Person {
 		return numPerson.get();
 	}
 	public void setNumPerson(Integer numPerson) {
-		System.out.println("setNumPerson");
 		this.numPerson.set(numPerson);
 	}
 	public IntegerProperty numPersonProperty() {
@@ -56,7 +55,6 @@ public class Person {
 		return firstName.get();
 	}
 	public void setFirstName(String firstName) {
-		System.out.println("setFirstName");
 		this.firstName.set(firstName);
 	}
 	public StringProperty firstNameProperty() {

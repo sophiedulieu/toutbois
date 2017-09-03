@@ -25,6 +25,8 @@ import model.Company;
 import model.Contact;
 import model.Prospect;
 import model.Representative;
+import type.AlertDialog;
+import type.TypeError;
 import type.TypeStreet;
 import util.DataWrapper;
 
@@ -139,6 +141,7 @@ public class Main extends Application {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+			new AlertDialog(TypeError.INIT_ROOT_LAYOUT_ERROR);
         }        
     }
 
@@ -192,8 +195,8 @@ public class Main extends Application {
 			controller.setMainApp(this);
 		}
 		catch (IOException e) {
-			// TODO Error
 			e.printStackTrace();
+			new AlertDialog(TypeError.SHOW_CLIENT_VIEW_ERROR);
 		}
 	}
 
@@ -223,8 +226,8 @@ public class Main extends Application {
 			controller.setMainApp(this);
 		}
 		catch (IOException e) {
-			// TODO Error
 			e.printStackTrace();
+			new AlertDialog(TypeError.SHOW_PROSPECT_VIEW_ERROR);
 		}
 	}
 	
@@ -249,8 +252,7 @@ public class Main extends Application {
 			}
 			catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("setFile() error");
-				// TODO new AlertDialog(TypeError.CREATE_FILE_ERROR);
+				new AlertDialog(TypeError.CREATE_FILE_ERROR);
 			}
 		}
 		// TODO setFilePath(file) if needed;
@@ -292,8 +294,7 @@ public class Main extends Application {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("saveData() error");
-			// TODO new AlertDialog(TypeError.SAVE_DATA_ERROR);
+			new AlertDialog(TypeError.SAVE_DATA_ERROR);
 		}
 	}
 
@@ -353,8 +354,7 @@ public class Main extends Application {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("loadData() error");
-			// TODO new AlertDialog(TypeError.LOAD_DATA_ERROR);
+			new AlertDialog(TypeError.LOAD_DATA_ERROR);
 		}
 	}
 	
