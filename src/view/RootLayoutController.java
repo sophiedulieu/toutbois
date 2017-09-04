@@ -1,26 +1,69 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import mainApp.Main;
 
 public class RootLayoutController {
 	
-	private Main main;
+	
+	
+	// ************* MAIN APP *************
+	
+	
+	private Main mainApp;
+	
+	public void setMainApp(Main mainApp) {
+		this.mainApp = mainApp;
+	}
+	
 
-	public void setMain(Main main) {
-		this.main = main;
-	}
 	
-	//Show Representative
+	// ************* MENU BAR *************
+	
+	
+	// Manage Clients
 	@FXML
-	private void handleShowRepresentant() {		               
-        main.showRepresentativeOverview();
+	private void handleShowClientView() {
+		mainApp.showClientView();
 	}
 	
-	//Leave program
+	// Manage Prospects
+	@FXML
+	private void handleShowProspectView() {
+		mainApp.showProspectView();
+	}
+	
+	// Manage Representative
+	@FXML
+	private void handleShowRepresentativeView() {
+		mainApp.showRepresentativeOverview();;
+	}
+	
+	// Help
+	// TODO Help
+	
+	// About
+	@FXML
+	private void handleAbout() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		String content = "Logiciel de gestion d'un annuaire de clients " + 
+				"et de prospects, et des représentants de l'entreprise." + 
+				"\n\nAuteur : Oupouwaout et Sophie";
+		alert.setTitle("ToutBois");
+		alert.setHeaderText("A propos");
+		alert.setContentText(content);
+
+		alert.showAndWait();
+	}
+	
+	// Exit
 	@FXML
 	private void handleExit() {
-		System.exit(0);
+		Platform.exit();
 	}
+	
 
-}
+} // public class RootLayoutController

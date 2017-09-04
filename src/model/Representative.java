@@ -55,8 +55,8 @@ public class Representative extends Person {
 		return ( getLastName() + " " + getFirstName() );
 	}
 	
-
+/*
 	public static ObservableList<Representative>getRepresentativeList() {
 		return getRepresentativeList();
-	}
+	}*/
 }

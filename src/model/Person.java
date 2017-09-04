@@ -39,7 +39,8 @@ public class Person {
 
 	
 	//Getters & Setters
-	public int getNumPerson() {
+
+	public Integer getNumPerson() {
 		return numPerson.get();
 	}
 	public void setNumPerson(Integer numPerson) {
