@@ -130,7 +130,7 @@ public class Main extends Application {
         try {
         	// Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../view/RootLayout.fxml"));
+            loader.setLocation(Main.class.getResource("/view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
@@ -158,7 +158,7 @@ public class Main extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../view/RepresentativeView.fxml"));
+            loader.setLocation(Main.class.getResource("/view/RepresentativeView.fxml"));
             AnchorPane representativeOverviewController = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -187,7 +187,7 @@ public class Main extends Application {
 		try {
 			// Load client view
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("../view/ClientView.fxml"));
+			loader.setLocation(Main.class.getResource("/view/ClientView.fxml"));
 			AnchorPane clientView = (AnchorPane) loader.load();
 
 			// Set client view into root layout
@@ -218,7 +218,7 @@ public class Main extends Application {
 		try {
 			// Load prospect view
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("../view/ProspectView.fxml"));
+			loader.setLocation(Main.class.getResource("/view/ProspectView.fxml"));
 			AnchorPane prospectView = (AnchorPane) loader.load();
 
 			// Set prospect view into root layout
