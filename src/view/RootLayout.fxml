@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane minHeight="750.0" minWidth="1000.0" prefHeight="750.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RootLayoutController">
    <top>
@@ -25,4 +27,18 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <Label text="TOUT BOIS" textFill="#cf653094" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Poor Richard" size="51.0" />
+         </font>
+      </Label>
+   </center>
+   <bottom>
+      <Label text="Les meubles qui tiennent pas droit" textFill="#cf65346d" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Rage Italic" size="37.0" />
+         </font>
+      </Label>
+   </bottom>
 </BorderPane>
