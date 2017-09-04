@@ -70,7 +70,10 @@ public class Main extends Application {
 	 */
 	@Override
 	public void init() {
-		loadData();
+		File file = new File ("Toutbois.xml");
+		if ( file.exists() ) {
+			loadData();
+		}
 	}
 	
 

@@ -1,0 +1,41 @@
+/*Couleur du boutton*/
+
+.button {
+	-fx-background-color:WHITE;
+	-fx-border-color:#DEB887;
+}
+.button:hover {
+	-fx-background-color:#DEB887;
+}
+
+/*Couleur du split-pane*/
+.split-pane {
+	-fx-background-color:#FFEBCD;
+}
+
+
+/*Style du tableau */
+.table-view {
+	-fx-base: #FFEBCD;
+    -fx-control-inner-background: #FFEBCD;
+    -fx-background-color: #FFEBCD;
+	-fx-border-color: 
+        transparent
+        transparent
+        derive(-fx-base, 80%) 
+        transparent;   
+        -fx-background-color: transparent;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: #DEB887;
+    -fx-text-fill:BLACK;
+}
+.split-pane:horizontal > .split-pane-divider {
+    -fx-border-color: transparent #FFEBCD transparent #FFEBCD;
+    -fx-background-color: transparent, derive(#FFEBCD,20%);
+}
+.split-pane:vertical > .split-pane-divider {
+    -fx-border-color: transparent #FFEBCD transparent #FFEBCD;
+    -fx-background-color: transparent, derive(#FFEBCD,20%);
+}

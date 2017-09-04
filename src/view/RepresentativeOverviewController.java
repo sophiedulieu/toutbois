@@ -144,23 +144,24 @@ public class RepresentativeOverviewController {
 			if (phoneNumField.getText() == null || phoneNumField.getText().length() == 0) {
 	            errorMessage += "Pas de téléphone !\n";
 	        }
-			if (phoneNumField.getText().length() >= 10) {
+			if (phoneNumField.getText().length() >= 18) {
 				errorMessage += "Le téléphone est trop long !";
 			}
 				
-			
-			if (commissionRateField.getText() == null || commissionRateField.getText().length() == 0) {
-	            errorMessage += "Taux non valide !\n";
-	        }
-			if (commissionRateField.getText().length() >= 10) {
-				errorMessage += "Le taux est trop long !";
-			}
 			
 			if (basicSalaryField.getText() == null || basicSalaryField.getText().length() == 0) {
 	            errorMessage += "Salaire non valide !\n";
 	        }
 			if (basicSalaryField.getText().length() >= 10) {
 				errorMessage += "Le salaire est trop grand !";
+			}
+			
+			
+			if (commissionRateField.getText() == null || commissionRateField.getText().length() == 0) {
+	            errorMessage += "Taux non valide !\n";
+	        }
+			if (commissionRateField.getText().length() >= 10) {
+				errorMessage += "Le taux est trop long !";
 			}
 			
 			
@@ -252,9 +253,9 @@ public class RepresentativeOverviewController {
 					selectedRepresentative.setPhoneNum(phoneNumField.getText());
 					selectedRepresentative.setFaxNum(faxNumField.getText());
 					selectedRepresentative.setEmail(emailField.getText());
-					selectedRepresentative.setCommissionRate(Double.parseDouble(commissionRateField.getText()));
 					selectedRepresentative.setBasicSalary(Double.parseDouble(basicSalaryField.getText()));
-		          
+					selectedRepresentative.setCommissionRate(Double.parseDouble(commissionRateField.getText()));
+						          
 				}		
 		        } 
 		        } 	
