@@ -11,6 +11,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -43,7 +45,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Enseigne">
+                              <Label text="*Enseigne">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -56,12 +58,12 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10.0" GridPane.rowIndex="1">
                            <children>
-                              <Label text="Siret">
+                              <Label text="*Siret">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="siretField" promptText="Siret" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="siretField" promptText="14 chiffres" HBox.hgrow="ALWAYS" />
                               <Label text="Nombre de commandes">
                                  <HBox.margin>
                                     <Insets />
@@ -72,7 +74,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="521.0" layoutY="124.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <Label text="Représentant">
+                              <Label text="*Représentant">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -171,14 +173,14 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10.0" GridPane.rowIndex="4">
                            <children>
-                              <Label text="N°">
+                              <Label text="*N°">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                               </Label>
                               <TextField fx:id="numAddressField" prefHeight="25.0" prefWidth="50.0" promptText="N°" />
-                              <ComboBox fx:id="typeStreetBox" prefWidth="90.0" promptText="Voie" />
-                              <TextField fx:id="nameStreetField" prefHeight="25.0" prefWidth="185.0" promptText="Nom de voie" HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="typeStreetBox" prefWidth="90.0" promptText="*Voie" />
+                              <TextField fx:id="nameStreetField" prefHeight="25.0" prefWidth="185.0" promptText="*Nom de voie" HBox.hgrow="ALWAYS" />
                            </children>
                            <GridPane.margin>
                               <Insets />
@@ -196,13 +198,13 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="10.0" GridPane.rowIndex="6">
                            <children>
-                              <Label text="Code Postal">
+                              <Label text="*Code Postal">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                               </Label>
                               <TextField fx:id="postalCodeField" promptText="Code postal" HBox.hgrow="ALWAYS" />
-                              <Label text="Ville">
+                              <Label text="*Ville">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -258,5 +260,10 @@
             </TableView>
          </items>
       </SplitPane>
+      <ImageView disable="true" fitHeight="750.0" fitWidth="1024.0" opacity="0.18">
+         <image>
+            <Image url="@../../resources/images/bois_icone.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

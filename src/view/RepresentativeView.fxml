@@ -6,12 +6,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RepresentativeOverviewController">
+<AnchorPane focusTraversable="true" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RepresentativeOverviewController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="79.0" layoutY="105.0" orientation="VERTICAL" prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -37,12 +39,12 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label styleClass="label-bright" text="Prenom" />
+                                                <Label styleClass="label-bright" text="*Prenom" />
                                                 <Label styleClass="label-bright" text="Numero" GridPane.rowIndex="1" />
-                                                <Label styleClass="label-bright" text="SalaireBrut" GridPane.rowIndex="3" />
-                                                <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
-                                                <TextField fx:id="basicSalaryField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <TextField fx:id="faxNumField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label styleClass="label-bright" text="*SalaireBrut" GridPane.rowIndex="3" />
+                                                <TextField fx:id="firstNameField" promptText="Prénom" GridPane.columnIndex="1" />
+                                                <TextField fx:id="basicSalaryField" promptText="Salaire brut" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="faxNumField" promptText="Facultatif" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                 <Label text="Fax" GridPane.rowIndex="2" />
                                                 <Label fx:id="numPersonField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
@@ -63,14 +65,14 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Label styleClass="label-bright" text="Nom" />
-                                                <TextField fx:id="lastNameField" GridPane.columnIndex="1" />
-                                                <Label text="Téléphone" GridPane.rowIndex="1" />
-                                                <TextField fx:id="phoneNumField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="Email" GridPane.rowIndex="2" />
-                                                <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label styleClass="label-bright" text="Taux de Commission" GridPane.rowIndex="3" />
-                                                <TextField fx:id="commissionRateField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label styleClass="label-bright" text="*Nom" />
+                                                <TextField fx:id="lastNameField" promptText="Nom" GridPane.columnIndex="1" />
+                                                <Label text="*Téléphone" GridPane.rowIndex="1" />
+                                                <TextField fx:id="phoneNumField" promptText="+33" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="*Email" GridPane.rowIndex="2" />
+                                                <TextField fx:id="emailField" promptText="mail@mail.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label styleClass="label-bright" text="*Taux de Commission" GridPane.rowIndex="3" />
+                                                <TextField fx:id="commissionRateField" promptText="taux de commission" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -111,5 +113,10 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <ImageView disable="true" fitHeight="700.0" fitWidth="1008.0" opacity="0.3">
+         <image>
+            <Image url="@../../resources/images/bois_icone.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
