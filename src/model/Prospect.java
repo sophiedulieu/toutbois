@@ -1,14 +1,12 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDate;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import type.LocalDateAdapter;
 import type.TypeStreet;
 
 
@@ -126,13 +124,16 @@ public class Prospect extends Company {
 
     // lastVisit
 
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getLastVisit() {
     	return lastVisit.get();
     }
 
     public void setLastVisit(LocalDate lastVisit) {
     	this.lastVisit.set(lastVisit);
+    }
+
+    public void setLastVisit(Date lastVisit) {
+    	this.lastVisit.set(lastVisit.toLocalDate());
     }
 
     public ObjectProperty<LocalDate> lastVisitProperty() {

@@ -29,13 +29,12 @@ public abstract class Company {
 
     private static ObservableList<Company> companyList = 
     		FXCollections.observableArrayList();
+    private static int aiCompany;
 
 	protected final IntegerProperty idCompany;
 	protected final StringProperty companyName;
 	protected final LongProperty siret;
-    @XmlTransient
 	protected final ObjectProperty<Representative> representative;
-    @XmlTransient
 	protected final ObjectProperty<Contact> contact;
 	protected final ObjectProperty<Address> address;
     
@@ -56,13 +55,7 @@ public abstract class Company {
     public Company ( String companyName, Long siret, Contact contact, 
     		Address address, Representative representative ) {
 
-    	if (companyList.isEmpty()) {
-        	this.idCompany = new SimpleIntegerProperty(0);
-    	}
-    	else {
-        	this.idCompany = new SimpleIntegerProperty(
-        			companyList.get(companyList.size()-1).getIdCompany()+1);
-    	}
+    	this.idCompany = new SimpleIntegerProperty(aiCompany);
     	this.companyName = new SimpleStringProperty(companyName);
     	this.siret = new SimpleLongProperty(siret);
     	this.contact = new SimpleObjectProperty<Contact>(contact);
@@ -70,6 +63,7 @@ public abstract class Company {
     	this.representative = new SimpleObjectProperty<Representative>(representative);
     	
     	companyList.add(this);
+    	aiCompany++;
     }
     
 
@@ -282,6 +276,17 @@ public abstract class Company {
 					company.getRepresentative().getNumPerson());
 		}
 		return companyRepresentativeMap;
+    }
+	
+    
+    // aiCompany
+    
+    public static int getAiCompany() {
+        return aiCompany;
+    }
+
+    public static void setAiCompany(int ai) {
+        aiCompany = ai;
     }
     
     

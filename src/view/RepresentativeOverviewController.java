@@ -1,5 +1,9 @@
 package view;
 
+import java.sql.SQLException;
+import java.text.ParseException;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -9,7 +13,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mainApp.Main;
+import model.Company;
 import model.Representative;
+import dao.RepresentativeDAO;
 
 public class RepresentativeOverviewController {
 
@@ -53,7 +59,7 @@ public class RepresentativeOverviewController {
 		private Representative representative;
 		private Stage dialogStage;
 		private Main main;
-		
+				  
 		
 		//Constructor
 	    public RepresentativeOverviewController() {    	
@@ -62,28 +68,46 @@ public class RepresentativeOverviewController {
 	    
 	    //Initialize controller
 	    @FXML
-	    private void initialize() {
+	    private void initialize() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
-	        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-	        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+	    	//representativeTable.setItems(Representative.getRepresentativeData());
+	    	firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+	        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());	        
 	        numPersonColumn.setCellValueFactory(cellData -> cellData.getValue().numPersonProperty().asObject());
 	        phoneNumColumn.setCellValueFactory(cellData -> cellData.getValue().phoneNumProperty());
 	        faxNumColumn.setCellValueFactory(cellData -> cellData.getValue().faxNumProperty());
 	        emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
 	        basicSalaryColumn.setCellValueFactory(cellData -> cellData.getValue().basicSalaryProperty().asObject());
 	        commissionRateColumn.setCellValueFactory(cellData -> cellData.getValue().commissionRateProperty().asObject());
-	        
+	        searchRepresentatives();
 	        showRepresentativeDetails(null);
 
 	        representativeTable.getSelectionModel().selectedItemProperty().addListener(
 	                (observable, oldValue, newValue) -> showRepresentativeDetails(newValue));
+	        
+	        
 	    }
 	    
-	    
+	    //Search all representatives
+	    public void searchRepresentatives() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	        try {
+	            //Get all Employees information
+	            ObservableList<Representative> rpData = RepresentativeDAO.searchRepresentatives ();
+	            //Populate Employees on TableView
+	            populateRepresentatives (rpData);
+	        } catch (SQLException e){
+	            System.out.println("Error occurred while getting clients information from DB.\n" + e);
+	            throw e;
+	        }
+	    }
+	    public void  populateRepresentatives (ObservableList<Representative> repData) throws ClassNotFoundException {
+	        //Set items to the clientsTable
+	    	representativeTable.setItems(repData);
+	    }
 		public void setMain(Main main) {
 			this.main = main;	
 			// Add observable list data to the table
-	        representativeTable.setItems(Representative.getRepresentativeData());		
+	        //representativeTable.setItems(Representative.getRepresentativeData());		
 		}
 	    
 	    
@@ -91,7 +115,7 @@ public class RepresentativeOverviewController {
 		private void showRepresentativeDetails(Representative representative) {
 
 			if (representative != null) {
-				//Fill lavels with representative informations
+				//Fill labels with representative informations
 				firstNameField.setText(representative.getFirstName());
 	            lastNameField.setText(representative.getLastName());           	            
 				numPersonField.setText(Integer.toString(representative.getNumPerson()));
@@ -122,7 +146,7 @@ public class RepresentativeOverviewController {
 	            errorMessage += "Pas de prénom !\n";
 	        }
 			
-			if (firstNameField.getText().length() >= 15) {
+			if (firstNameField.getText().length() >= 20) {
 				errorMessage += "Le prénom est trop long !";
 			}
 			
@@ -160,7 +184,7 @@ public class RepresentativeOverviewController {
 			if (commissionRateField.getText() == null || commissionRateField.getText().length() == 0) {
 	            errorMessage += "Taux non valide !\n";
 	        }
-			if (commissionRateField.getText().length() >= 10) {
+			if (commissionRateField.getText().length() >= 4) {
 				errorMessage += "Le taux est trop long !";
 			}
 			
@@ -184,81 +208,84 @@ public class RepresentativeOverviewController {
 		
 		//Delete one Representative
 		@FXML
-		private void handleDeleteRepresentative() {
-		    int selectedIndex = representativeTable.getSelectionModel().getSelectedIndex();
-		    if (selectedIndex >= 0) {
-		    representativeTable.getItems().remove(selectedIndex);
-		    } else {
-		    	// Nothing is selected
-		        Alert alert = new Alert(AlertType.WARNING);
-		        alert.initOwner(main.getPrimaryStage());
-		        alert.setTitle("Aucune sélection");
-		        alert.setHeaderText("Aucun représentant sélectionné !");
-		        alert.setContentText("Sélectionnez un représentant dans la table");
-
-		        alert.showAndWait();
-		    }
+		private void handleDeleteRepresentative(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+			/*
+			try {
+				RepresentativeDAO.deleteRepWithId(numPersonField.getText());
+				System.out.println("Représentant supprimé !");
+			} catch (SQLException e) {
+				System.out.println("Impossible de supprimer le représentant " + e);
+				throw e;
+			}
+			*/
+			for (Company company : Company.getCompanyList()) {
+				if (company.getRepresentative().getNumPerson() == Integer.parseInt(numPersonField.getText())) {
+					System.out.println("Impossible de supprimer le représentant ");
+					break;
+				}
+				else {
+					try {
+						RepresentativeDAO.deleteRepWithId(numPersonField.getText());
+						System.out.println("Représentant supprimé !");
+					} catch (SQLException e) {
+						System.out.println("Impossible de supprimer le représentant " + e);
+						throw e;
+					}
+					break;
+				}
+			}
+			searchRepresentatives();
 		}
+		
 	    
 		
 		//Add and edit
 		//Add a representative
-		public boolean isAddClicked() {
-	        return addClicked;
-	    }
-		boolean addClicked = false;
-		
-		@FXML
-		private void handleAdd() {
-			if (isInputValid()) {
-				
-				Representative represeTemp = new Representative(firstNameField.getText(), 
-						lastNameField.getText(), 
-						//Integer.parseInt(numPersonField.getText()), 
-						phoneNumField.getText(), 
-						faxNumField.getText(),
-						emailField.getText(),
-						Double.parseDouble(basicSalaryField.getText()), 
-						Double.parseDouble(commissionRateField.getText()));
-				
-				addClicked = true;
+		@FXML 
+		private void handleAdd(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
 			
-				if (addClicked) {
-		            Representative.getRepresentativeData().add(represeTemp);
+			try {
+				RepresentativeDAO.insertRep(
+				firstNameField.getText(),
+				lastNameField.getText(),
+				emailField.getText(),
+				phoneNumField.getText(),
+				faxNumField.getText(),
+				Double.parseDouble(commissionRateField.getText()),
+				Double.parseDouble(basicSalaryField.getText())
+				);
+				System.out.println("Représentant ajouté");
+						
+			} catch (SQLException e) {
+				System.out.println("Problème lors de l'ajout du représentant " + e);
+				throw e;
 			}
-				
-			}
-			
+			searchRepresentatives();
 		}
 		
-		//Edit one representative
-		public boolean isEditClicked() {
-	        return editClicked;
-	    }
-		boolean editClicked = false;
 		
+		//Edit a representative
 		@FXML
-		private void handleEdit() {
+		private void handleEdit(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
 			
-		if (isInputValid()) {			
-			
-			if (editClicked=true) {
-			
-				Representative selectedRepresentative = representativeTable.getSelectionModel().getSelectedItem();
-				if (selectedRepresentative != null) {
-		            
-					selectedRepresentative.setFirstName(firstNameField.getText());
-					selectedRepresentative.setLastName(lastNameField.getText());
-					selectedRepresentative.setNumPerson(Integer.parseInt(numPersonField.getText()));
-					selectedRepresentative.setPhoneNum(phoneNumField.getText());
-					selectedRepresentative.setFaxNum(faxNumField.getText());
-					selectedRepresentative.setEmail(emailField.getText());
-					selectedRepresentative.setBasicSalary(Double.parseDouble(basicSalaryField.getText()));
-					selectedRepresentative.setCommissionRate(Double.parseDouble(commissionRateField.getText()));
-						          
-				}		
-		        } 
-		        } 	
+			try {
+				RepresentativeDAO.updateRep(
+						numPersonField.getText(),
+						firstNameField.getText(),
+						lastNameField.getText(),
+						emailField.getText(),
+						phoneNumField.getText(),
+						faxNumField.getText(),
+						Double.parseDouble(commissionRateField.getText()),
+						Double.parseDouble(basicSalaryField.getText())
+						);
+				System.out.println("Représentant édité");
+				
+			} catch (SQLException e) {
+				System.out.println("Le représentant n'a pu être édité " + e);
+				throw e;
+			}
+			searchRepresentatives();
 		}
 					
 }

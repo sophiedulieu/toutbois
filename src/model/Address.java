@@ -93,6 +93,10 @@ public class Address {
     public void setTypeStreet(TypeStreet typeStreet) {
         this.typeStreet.set(typeStreet);
     }
+    
+    public void setTypeStreet(String typeStreet) {
+        this.typeStreet.set(TypeStreet.valueOf(typeStreet)); 
+    }
 
     public ObjectProperty<TypeStreet> typeStreetProperty() {
         return typeStreet;

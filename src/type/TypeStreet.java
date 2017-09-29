@@ -9,23 +9,26 @@ package type;
  * @author	Oupouwaout
  */
 public enum TypeStreet {
-	ALLEE,
-	AVENUE,
-	BOULEVARD,
-	CHAUSSEE,
-	CHEMIN,
-	CITE,
-	COUR,
-	IMPASSE,
-	MAIL,
-	PASSAGE,
-	PLACE,
-	ROUTE,
-	RUE,
-	RUELLE,
-	SENTE,
-	SENTIER,
-	TRAVERSE,
-	VOIE,
-	AUTRE
+	Allée,
+	Avenue,
+	Boulevard,
+	Chaussée,
+	Chemin,
+	
+	Cité,
+	Cour,
+	Impasse,
+	Mail,
+	Passage,
+	
+	Place,
+	Route,
+	Rue,
+	Ruelle,
+	Sente,
+	
+	Sentier,
+	Traverse,
+	Voie,
+	Autre;
 }
