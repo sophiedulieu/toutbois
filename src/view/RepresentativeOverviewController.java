@@ -209,32 +209,25 @@ public class RepresentativeOverviewController {
 		//Delete one Representative
 		@FXML
 		private void handleDeleteRepresentative(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-			/*
-			try {
-				RepresentativeDAO.deleteRepWithId(numPersonField.getText());
-				System.out.println("Représentant supprimé !");
-			} catch (SQLException e) {
-				System.out.println("Impossible de supprimer le représentant " + e);
-				throw e;
-			}
-			*/
-			for (Company company : Company.getCompanyList()) {
-				if (company.getRepresentative().getNumPerson() == Integer.parseInt(numPersonField.getText())) {
-					System.out.println("Impossible de supprimer le représentant ");
-					break;
-				}
-				else {
-					try {
-						RepresentativeDAO.deleteRepWithId(numPersonField.getText());
-						System.out.println("Représentant supprimé !");
-					} catch (SQLException e) {
-						System.out.println("Impossible de supprimer le représentant " + e);
-						throw e;
+			if (isInputValid()) {
+				for (Company company : Company.getCompanyList()) {
+					if (company.getRepresentative().getNumPerson() == Integer.parseInt(numPersonField.getText())) {
+						System.out.println("Impossible de supprimer le représentant ");
+						break;
 					}
-					break;
+					else {
+						try {
+							RepresentativeDAO.deleteRepWithId(numPersonField.getText());
+							System.out.println("Représentant supprimé !");
+						} catch (SQLException e) {
+							System.out.println("Impossible de supprimer le représentant " + e);
+							throw e;
+						}
+						break;
+					}
 				}
+				searchRepresentatives();
 			}
-			searchRepresentatives();
 		}
 		
 	    
@@ -243,49 +236,53 @@ public class RepresentativeOverviewController {
 		//Add a representative
 		@FXML 
 		private void handleAdd(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
-			
-			try {
-				RepresentativeDAO.insertRep(
-				firstNameField.getText(),
-				lastNameField.getText(),
-				emailField.getText(),
-				phoneNumField.getText(),
-				faxNumField.getText(),
-				Double.parseDouble(commissionRateField.getText()),
-				Double.parseDouble(basicSalaryField.getText())
-				);
-				System.out.println("Représentant ajouté");
-						
-			} catch (SQLException e) {
-				System.out.println("Problème lors de l'ajout du représentant " + e);
-				throw e;
+
+			if (isInputValid()) {
+				try {
+					RepresentativeDAO.insertRep(
+							firstNameField.getText(),
+							lastNameField.getText(),
+							emailField.getText(),
+							phoneNumField.getText(),
+							faxNumField.getText(),
+							Double.parseDouble(commissionRateField.getText()),
+							Double.parseDouble(basicSalaryField.getText())
+							);
+					System.out.println("Représentant ajouté");
+
+				} catch (SQLException e) {
+					System.out.println("Problème lors de l'ajout du représentant " + e);
+					throw e;
+				}
+				searchRepresentatives();
 			}
-			searchRepresentatives();
 		}
-		
+
 		
 		//Edit a representative
 		@FXML
 		private void handleEdit(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException  {
-			
-			try {
-				RepresentativeDAO.updateRep(
-						numPersonField.getText(),
-						firstNameField.getText(),
-						lastNameField.getText(),
-						emailField.getText(),
-						phoneNumField.getText(),
-						faxNumField.getText(),
-						Double.parseDouble(commissionRateField.getText()),
-						Double.parseDouble(basicSalaryField.getText())
-						);
-				System.out.println("Représentant édité");
-				
-			} catch (SQLException e) {
-				System.out.println("Le représentant n'a pu être édité " + e);
-				throw e;
+
+			if (isInputValid()) {
+				try {
+					RepresentativeDAO.updateRep(
+							numPersonField.getText(),
+							firstNameField.getText(),
+							lastNameField.getText(),
+							emailField.getText(),
+							phoneNumField.getText(),
+							faxNumField.getText(),
+							Double.parseDouble(commissionRateField.getText()),
+							Double.parseDouble(basicSalaryField.getText())
+							);
+					System.out.println("Représentant édité");
+
+				} catch (SQLException e) {
+					System.out.println("Le représentant n'a pu être édité " + e);
+					throw e;
+				}
+				searchRepresentatives();
 			}
-			searchRepresentatives();
 		}
 					
 }

@@ -1,5 +1,7 @@
 package view;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -7,9 +9,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import mainApp.Main;
+import dao.AddressDAO;
+import dao.CompanyDAO;
+import dao.ContactDAO;
 import model.Company;
 import model.Representative;
+import type.AlertDialog;
 import type.TypeStreet;
+import type.TypeWarning;
 
 
 
@@ -19,7 +26,7 @@ import type.TypeStreet;
 public abstract class CompanyViewController {
 
 
-	// ************* MAIN APP ************
+	// ***************   MAIN APP   ***************
 
 
 	protected Main mainApp;
@@ -28,8 +35,9 @@ public abstract class CompanyViewController {
 		this.mainApp = mainApp;
 	}
 
+	
 
-	// ************* TABLE **********
+	// ****************   TABLE   *****************
 
 
 	@FXML
@@ -47,7 +55,7 @@ public abstract class CompanyViewController {
 
 
 
-	//**************   FORM  *************
+	// *****************   FORM   *****************
 
 
 	// Company
@@ -151,7 +159,7 @@ public abstract class CompanyViewController {
 
 
 
-	// *********** INIT *********************
+	// *****************   INIT   *****************
 
 
 	@FXML
@@ -183,11 +191,11 @@ public abstract class CompanyViewController {
 
 
 
-	// ************* BUTTONS *************
+	// ***************   BUTTONS   ****************
 
 
 	// btnReset (vider)
-	@FXML
+	//@FXML
 	protected void handleReset() {
 		companyTable.getSelectionModel().clearSelection();
 		showDetails(null);
@@ -195,14 +203,23 @@ public abstract class CompanyViewController {
 
 
 	// btnAdd
-	@FXML
-	protected void handleAdd() {
+	//@FXML
+	protected void handleAdd(Company company) throws SQLException {
+		if (true) { // TODO inputValidation
+			
+			int idContact = ContactDAO.insertContactDAO(company.getContact());
+			company.getContact().setNumPerson(idContact);
+			int idAddress = AddressDAO.insertAddressDAO(company);
+			int idCompany = CompanyDAO.insertCompanyDAO(company, idAddress);
+			company.setIdCompany(idCompany);
+		}
 	}
 
 
 	// btnEdit
 	@FXML
-	protected void handleEdit() {
+	protected void handleEdit() throws SQLException {
+		
 		Company selectedCompany = companyTable.getSelectionModel().getSelectedItem();
 		if (selectedCompany != null) {
 
@@ -225,30 +242,28 @@ public abstract class CompanyViewController {
 			selectedCompany.getAddress().setCity(cityField.getText());
 			// representative
 			selectedCompany.setRepresentative(representativeBox.getValue());
+			
+			// Data
+			CompanyDAO.editCompanyDAO(selectedCompany);
 		}
 		else {
-			// No selection
-			// TODO new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
+			new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
 		}
 	}
 
 
 	// btnDelete
 	@FXML
-	protected void handleDelete() {
+	protected void handleDelete() throws SQLException {
 		int selectedIndex = companyTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			companyTable.getItems().remove(selectedIndex);
 		}
 		else {
-			// No selection
-			// TODO new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
+			new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
 		}
 	}
 
-
-
-
-
+	
 
 } // public class CompanyViewController

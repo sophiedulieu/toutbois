@@ -1,11 +1,18 @@
 package view;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
+import dao.ClientDAO;
+import dao.ProspectDAO;
 import model.Client;
 import model.Prospect;
+import type.AlertDialog;
+import type.TypeWarning;
 
 
 
@@ -15,8 +22,7 @@ import model.Prospect;
 public class ClientViewController extends CompanyViewController {
 
 
-
-	// ************* TABLE **********
+	// ****************   TABLE   *****************
 
 
 	@FXML
@@ -26,7 +32,7 @@ public class ClientViewController extends CompanyViewController {
 
 
 
-	// **************   FORM  *************
+	// *****************   FORM   *****************
 
 
 	// Client
@@ -48,7 +54,7 @@ public class ClientViewController extends CompanyViewController {
 
 
 
-	// *********** INIT *********************
+	// *****************   INIT   *****************
 
 
 	@FXML
@@ -72,7 +78,7 @@ public class ClientViewController extends CompanyViewController {
 
 
 
-	// ************* BUTTONS *************
+	// ***************   BUTTONS   ****************
 
 
 	// btnReset (vider)
@@ -85,10 +91,11 @@ public class ClientViewController extends CompanyViewController {
 
 	// btnAdd
 	@FXML
-	protected void handleAdd() {
+	protected void handleAdd() throws SQLException {
 		if (true) { // TODO inputValidation
 
-			new Client (
+			// Object
+			Client client = new Client (
 					// company
 					companyNameField.getText(),
 					Long.parseLong(siretField.getText()), 
@@ -106,36 +113,63 @@ public class ClientViewController extends CompanyViewController {
 					// representative
 					representativeBox.getValue()
 			);
+
+			//Data
+			super.handleAdd(client);
+			ClientDAO.insertClientDAO(client);
+			// TODO Rollback on duplicate siret exception
 		}
 	}
 
 
 	// btnEdit
 	@FXML
-	protected void handleEdit() {
+	protected void handleEdit() throws SQLException {
 		super.handleEdit();
-		
+
 		Client selectedClient = companyTable.getSelectionModel().getSelectedItem();
 		if (selectedClient != null) {
+			// Object
 			companyTable.refresh();
+			// Data
+			ClientDAO.editClientDAO(selectedClient);
 		}
 	}
 	
 	
 	// btnMutate
 	@FXML
-	protected void handleMutate() {
+	protected void handleMutate() throws SQLException {
 
 		Client selectedClient = companyTable.getSelectionModel().getSelectedItem();
 		if (selectedClient != null) {
-			new Prospect(selectedClient);
+			// Object
+			Prospect prospect = new Prospect(selectedClient);
+			// Data
+			ProspectDAO.clientToProspect(prospect);
+		}
+		else {
+			new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
+		}
+	}
+
+
+	// btnDelete
+	@FXML
+	protected void handleDelete() throws SQLException {
+
+		Client selectedClient = companyTable.getSelectionModel().getSelectedItem();
+		if (selectedClient != null) {
+			// Object
+			companyTable.getItems().remove(selectedClient);
+			// Data
+			ClientDAO.deleteClient(selectedClient);
+		}
+		else {
+			new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
 		}
 	}
 	
-
-
-
-
-
+	
 
 } // public class ClientViewController

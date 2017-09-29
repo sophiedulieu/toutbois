@@ -17,14 +17,16 @@ import util.MySqlAdapter;
 import type.AlertDialog;
 import type.TypeError;
 
-public class Main extends Application {
 
+
+public class Main extends Application {
 
 
 	// ***********   MAIN APPLICATION   ***********
 	
 
 	// Main
+	
     public static void main(String[] args) {
         launch(args);
     }
@@ -54,21 +56,6 @@ public class Main extends Application {
     @Override
     public void init() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
     	loadData();
-    	// TODO test
-    	/*
-    	for (Representative representative : RepresentativeDAO.getRepresentativeListDAO()) {
-    		System.out.println(
-    				representative.getIdPerson()
-    				+ " " + representative.getFirstName()
-    				+ " " + representative.getBasicSalary());
-    	}
-    	for (Representative representative : Representative.getRepresentativeList()) {
-    		System.out.println(
-    				representative.getIdPerson()
-    				+ " " + representative.getFirstName()
-    				+ " " + representative.getBasicSalary());
-    	}
-    	*/
     }
 	
 

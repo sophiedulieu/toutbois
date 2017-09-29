@@ -90,10 +90,7 @@ public class Client extends Company {
     /**
      * Default Client constructor.
      * <p>
-     * This constructor generates an empty client object used by 
-     * the unmarshaller from mainApp.loadData(). The unmarshaller 
-     * injects the datas from the .xml file into the zombie client 
-     * attributes using the setters.
+     * This constructor generates an empty client object.
      */
     public Client () {
     	this(null, 0L, null, null, null);
@@ -135,6 +132,5 @@ public class Client extends Company {
     }
 
     
-	
 
 } // public class Client

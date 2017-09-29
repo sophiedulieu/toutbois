@@ -6,39 +6,49 @@ import java.sql.SQLException;
 import model.Person;
 import util.MySqlAdapter;
 
+
+
+/**
+ * @author	Oupouwaout
+ */
 public abstract class PersonDAO {
 	
-	
-	
+
+	// Set Person's attributes
+	/**
+	 * Gets the person's details from the database and 
+	 * sets its attributes.
+	 * 
+	 * @param person the person whom to set attributes
+	 * @throws SQLException
+	 */
 	public static void getPersonDAO(Person person) throws SQLException {
 
+		// Get the person's details
 		String selectSt = 
 				"SELECT * "
 				+ "FROM Person "
 				+ "WHERE idPerson = " + person.getNumPerson() + ";";
 		ResultSet rs = MySqlAdapter.dbExecuteQuery(selectSt);
 
+		// Set the person's details
         while (rs.next()) {
-        	// TODO test
-        	/*
-        	System.out.println(rs.getString("firstName"));
-        	System.out.println(rs.getString("lastName"));
-        	System.out.println(rs.getString("phoneNum"));
-        	System.out.println(rs.getString("faxNum"));
-        	System.out.println(rs.getString("email"));
-        	*/
-        	
         	person.setFirstName(rs.getString("firstName"));
         	person.setLastName(rs.getString("lastName"));
         	person.setPhoneNum(rs.getString("phoneNum"));
         	person.setFaxNum(rs.getString("faxNum"));
         	person.setEmail(rs.getString("email"));
         }
-		
 	}
 	
-	
-	
+
+	// Get Person auto_increment
+	/**
+	 * Requests the actual auto_increment for the table <code>Person</code>.
+	 * 
+	 * @return the Person auto_increment
+	 * @throws SQLException
+	 */
 	public static int getAiPersonDAO() throws SQLException {
 
 		int aiPersonDAO = 1;
@@ -58,5 +68,4 @@ public abstract class PersonDAO {
 	
 	
 	
-
 } // public class PersonDAO

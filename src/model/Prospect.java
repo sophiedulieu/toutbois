@@ -99,10 +99,7 @@ public class Prospect extends Company {
     /**
      * Default Prospect constructor.
      * <p>
-     * This constructor generates an empty prospect object used by 
-     * the unmarshaller from mainApp.loadData(). The unmarshaller 
-     * injects the datas from the .xml file into the ghost prospect 
-     * attributes using the setters.
+     * This constructor generates an empty prospect object.
      */
     public Prospect() {
     	this (null, 0L, null, null, null, null);
@@ -146,7 +143,6 @@ public class Prospect extends Company {
     public static ObservableList<Prospect> getProspectList() {
         return prospectList;
     }
-    
     
     
 

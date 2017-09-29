@@ -55,10 +55,7 @@ public class Address {
     /**
      * Default Address constructor.
      * <p>
-     * This constructor generates an empty address object used by 
-     * the unmarshaller from <code>mainApp.loadData()</code>. The 
-     * unmarshaller injects the datas from the .xml file into the 
-     * empty address attributes using the setters, making it real.
+     * This constructor generates an empty address object.
      */
     public Address() {
     	this (null, null, null, null, null, null);

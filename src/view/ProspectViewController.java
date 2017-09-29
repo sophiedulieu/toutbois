@@ -1,13 +1,19 @@
 package view;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import dao.ClientDAO;
+import dao.ProspectDAO;
 import model.Client;
 import model.Prospect;
+import type.AlertDialog;
+import type.TypeWarning;
 
 
 
@@ -18,7 +24,7 @@ public class ProspectViewController extends CompanyViewController {
 
 
 
-	// ************* TABLE **********
+	// ****************   TABLE   *****************
 
 
 	@FXML
@@ -28,7 +34,7 @@ public class ProspectViewController extends CompanyViewController {
 
 
 
-	// **************   FORM  *************
+	// *****************   FORM   *****************
 
 
 	// Prospect
@@ -50,7 +56,7 @@ public class ProspectViewController extends CompanyViewController {
 
 
 
-	// *********** INIT *********************
+	// *****************   INIT   *****************
 
 
 	@FXML
@@ -74,7 +80,7 @@ public class ProspectViewController extends CompanyViewController {
 
 
 
-	// ************* BUTTONS *************
+	// ***************   BUTTONS   ****************
 
 
 	// btnReset (vider)
@@ -87,10 +93,11 @@ public class ProspectViewController extends CompanyViewController {
 
 	// btnAdd
 	@FXML
-	protected void handleAdd() {
+	protected void handleAdd() throws SQLException {
 		if (true) { // TODO inputValidation
 
-			new Prospect (
+			//Object
+			Prospect prospect = new Prospect (
 					// company
 					companyNameField.getText(),
 					Long.parseLong(siretField.getText()), 
@@ -110,36 +117,66 @@ public class ProspectViewController extends CompanyViewController {
 
 					// prospect
 					lastVisitPicker.getValue());
+			
+			//Data
+			super.handleAdd(prospect);
+			ProspectDAO.insertProspectDAO(prospect);
+			// TODO Rollback on duplicate siret exception
 		}
+		
 	}
 
 
 	// btnEdit
 	@FXML
-	protected void handleEdit() {
+	protected void handleEdit() throws SQLException {
 		super.handleEdit();
 		
 		Prospect selectedProspect = companyTable.getSelectionModel().getSelectedItem();
 		if (selectedProspect != null) {
+			// Object
 			selectedProspect.setLastVisit(lastVisitPicker.getValue());
 			companyTable.refresh();
+			// Data
+			ProspectDAO.editProspectDAO(selectedProspect);
 		}
 	}
 	
 	
 	// btnMutate
 	@FXML
-	protected void handleMutate() {
+	protected void handleMutate() throws SQLException {
 
 		Prospect selectedProspect = companyTable.getSelectionModel().getSelectedItem();
 		if (selectedProspect != null) {
-			new Client(selectedProspect);
+			// Object
+			Client client = new Client(selectedProspect);
+			// Data
+			ClientDAO.prospectToClient(client);
+		}
+		else {
+			new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
 		}
 	}
 
 
+	// btnDelete
+	@FXML
+	protected void handleDelete() throws SQLException {
 
+		// Object
+		Prospect selectedProspect = companyTable.getSelectionModel().getSelectedItem();
+		if (selectedProspect != null) {
+			// Object
+			companyTable.getItems().remove(selectedProspect);
+			// Data
+			ProspectDAO.deleteProspect(selectedProspect);
+		}
+		else {
+			new AlertDialog(TypeWarning.NO_COMPANY_SELECTED);
+		}
+	}
 
-
+	
 
 } // public class ProspectViewController

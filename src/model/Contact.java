@@ -42,10 +42,7 @@ public class Contact extends Person {
     /**
      * Default Contact constructor.
      * <p>
-     * This constructor generates an empty contact object used by 
-     * the unmarshaller from <code>mainApp.loadData()</code>. The 
-     * unmarshaller injects the datas from the .xml file into the 
-     * ghost contact attributes using the <code>setters</code>.
+     * This constructor generates an empty contact object.
      */
     public Contact() {
     	this(null, null, null, null, null);
@@ -60,8 +57,6 @@ public class Contact extends Person {
     public static ObservableList<Contact> getContactList() {
         return contactList;
     }
-    
-    
     
     
 
