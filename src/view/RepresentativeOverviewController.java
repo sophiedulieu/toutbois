@@ -91,9 +91,9 @@ public class RepresentativeOverviewController {
 	    //Search all representatives
 	    public void searchRepresentatives() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 	        try {
-	            //Get all Employees information
+	            //Get all Representatives information
 	            ObservableList<Representative> rpData = RepresentativeDAO.searchRepresentatives ();
-	            //Populate Employees on TableView
+	            //Populate Representatives on TableView
 	            populateRepresentatives (rpData);
 	        } catch (SQLException e){
 	            System.out.println("Error occurred while getting clients information from DB.\n" + e);
@@ -101,7 +101,7 @@ public class RepresentativeOverviewController {
 	        }
 	    }
 	    public void  populateRepresentatives (ObservableList<Representative> repData) throws ClassNotFoundException {
-	        //Set items to the clientsTable
+	        //Set items to the representativesTable
 	    	representativeTable.setItems(repData);
 	    }
 		public void setMain(Main main) {
@@ -156,13 +156,6 @@ public class RepresentativeOverviewController {
 			if (lastNameField.getText().length() >= 20) {
 				errorMessage += "Le nom est trop long !";
 			}
-			
-			/* if (idPersonField.getText() == null || idPersonField.getText().length() == 0) {
-	            errorMessage += "Pas de numéro !\n";
-	        }
-			if (idPersonField.getText().length() >= 10) {
-				errorMessage += "Le numéro est trop long !";
-			} */
 			
 			
 			if (phoneNumField.getText() == null || phoneNumField.getText().length() == 0) {
